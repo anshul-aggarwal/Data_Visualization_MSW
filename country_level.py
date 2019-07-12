@@ -37,17 +37,17 @@ for row in country_data:
     except ValueError:
         print("MSW data for country missing - " + row[iso3c_country_data])
         #msw_kg[row[iso3c_country_data]] = 0
+    
 
-outfile = open("msw_kg_per_capita.tsv", "w+")
-outfile.write("Country\tMSW_kg_per_capita\n")
+outfile = open("msw_kg.tsv", "w+")
+outfile.write("Country\tMSW_kg\tMSW_kg_per_capita\n")
 for country_iso3c in country_names:
     try:
         msw_per_capita = msw_kg[country_iso3c]/population_list[country_iso3c]
-        outfile.write(country_names[country_iso3c] +"\t"+ str(msw_per_capita) + "\n")
+        outfile.write(country_names[country_iso3c] + "\t" + str(msw_kg[country_iso3c]) +"\t"+ str(msw_per_capita) + "\n")
     except ZeroDivisionError:
         msw_per_capita = 0
     except KeyError:
         print("Data for country missing - " + country_iso3c + " - Skipping")
-    
 
 outfile.close() 
